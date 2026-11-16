@@ -13,6 +13,7 @@ public class ProductService {
 
 
     public ProductService() {
+
         products.add(new DigitalProduct(
                 nextId++, "Clean Code (E-book)", 29.99,
                 "/downloads/clean-code.pdf", 4.2));
@@ -48,6 +49,16 @@ public class ProductService {
         return products.stream()
                 .filter(p -> p.getName().contains(name))
                 .toList();
+    }
+
+    public List<String> getAllSummaries(){
+        List<String> summaries = new ArrayList<>();
+
+        for (Product p : products){
+            summaries.add(p.getSummary());
+        }
+
+        return summaries;
     }
 
 }

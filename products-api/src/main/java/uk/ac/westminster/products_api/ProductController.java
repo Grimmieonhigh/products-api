@@ -12,6 +12,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @GetMapping
     public List<Product> getAllProducts() {
         return productService.getAllProducts();
     }
@@ -21,20 +22,28 @@ public class ProductController {
         return productService.getProductById(id);
     }
 
-    @GetMapping("/products/search")
+    @GetMapping("/search")
     public List<Product> search(@RequestParam String name) {
         return productService.findByName(name);
     }
 
+
+    // use Digital Product because Product is abstract
     @PostMapping
-    public Product addProduct(Product product) {
+    public Product addProduct(@RequestBody DigitalProduct product) {
         return productService.addProduct(product);
     }
 
-    @DeleteMapping("/products/{id}")
+    @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable Long id){
         productService.deleteProduct(id);
     }
+
+    @GetMapping("/summaries")
+    public List<String> getSummaries(){
+        return productService.getAllSummaries();
+    }
+
 }
 
 
